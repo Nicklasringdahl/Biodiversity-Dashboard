@@ -42,8 +42,8 @@ d3.json("samples.json").then((jsondata) => {
       title: `<b> Test subjects top 10 OTUs</b>`,
       xaxis: { title: "Sample Value" },
       yaxis: { title: "OTU IDs" },
-      paper_bgcolor: "rgb(221, 218, 218)",
-      plot_bgcolor: "rgb(221, 218, 218))",
+      paper_bgcolor: "rgb(221, 221, 221)",
+      plot_bgcolor: "rgb(221, 221, 221))",
       autosize: false,
 
       width: 440,
@@ -71,8 +71,8 @@ d3.json("samples.json").then((jsondata) => {
       xaxis: { title: "OTU ID" },
       yaxis: { title: "Sample Value" },
       showlegend: false,
-      paper_bgcolor: "rgb(221, 218, 218)",
-      plot_bgcolor: "rgb(221, 218, 218)",
+      paper_bgcolor: "rgb(221, 221, 221)",
+      plot_bgcolor: "rgb(221, 221, 221)",
     };
 
     Plotly.newPlot("bubble", bubData, layout2);
@@ -121,8 +121,8 @@ d3.json("samples.json").then((jsondata) => {
       width: 440,
       height: 600,
       margin: { t: 0, b: 0, l: 40 },
-      paper_bgcolor: "rgb(221, 218, 218)",
-      plot_bgcolor: "rgb(221, 218, 218)",
+      paper_bgcolor: "rgb(221, 221, 221)",
+      plot_bgcolor: "rgb(221, 221, 221)",
     };
 
     Plotly.newPlot("gauge", gaugeData, gaugeLayout);
