@@ -5,40 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Bellybutton Biodiversity</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="static\bootstrap.css" />
   </head>
 
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-md-12 jumbotron text-center">
+        <div class="col-md-12 jumbotron text-white text-center bg-primary mb-3">
           <h1>Belly Button Biodiversity Dashboard</h1>
           <p>Use the interactive charts below to explore the dataset</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2">
-          <div class="well">
+        <div class="col-md-4">
+          <div class="card text-white bg-secondary mb-3">
             <h5>Test Subject ID No.:</h5>
             <select
               id="selDataset"
               onchange="optionChanged(this.value)"
             ></select>
           </div>
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title">Demographic Info</h3>
+          <div class="card text-white bg-primary mb-3" style="max-width: 20rem">
+            <div class="card-header">
+              <h3 class="card-title">Demographic Info</h3>
             </div>
-            <div id="sample-metadata" class="panel-body"></div>
+            <div id="sample-metadata" class="card-body"></div>
           </div>
         </div>
-        <div class="col-md-5">
-          <div id="bar"></div>
+        <div class="col-md-4">
+          <div id="bar" class="card bg-light mb-3"></div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
           <div id="gauge"></div>
         </div>
       </div>

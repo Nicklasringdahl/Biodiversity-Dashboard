@@ -26,6 +26,14 @@ d3.json("samples.json").then((jsondata) => {
       text: top10label,
       type: "bar",
       orientation: "h",
+      marker: {
+        color: "RGB(89, 49, 150)",
+        opacity: 1,
+        line: {
+          color: "rgb(8,48,107)",
+          width: 1.5,
+        },
+      },
     };
 
     var barData = [trace1];
@@ -34,8 +42,11 @@ d3.json("samples.json").then((jsondata) => {
       title: `<b> Test subjects top 10 OTUs</b>`,
       xaxis: { title: "Sample Value" },
       yaxis: { title: "OTU IDs" },
+      paper_bgcolor: "rgb(221, 218, 218)",
+      plot_bgcolor: "rgb(221, 218, 218))",
       autosize: false,
-      width: 450,
+
+      width: 440,
       height: 600,
     };
 
@@ -49,6 +60,7 @@ d3.json("samples.json").then((jsondata) => {
       marker: {
         color: OtuId,
         size: samplesdata,
+        colorscale: "Bluered",
       },
     };
 
@@ -59,21 +71,63 @@ d3.json("samples.json").then((jsondata) => {
       xaxis: { title: "OTU ID" },
       yaxis: { title: "Sample Value" },
       showlegend: false,
+      paper_bgcolor: "rgb(221, 218, 218)",
+      plot_bgcolor: "rgb(221, 218, 218)",
     };
 
     Plotly.newPlot("bubble", bubData, layout2);
 
-    // DEMOGRAPHIC INFO
+    // Adding the demographic data to card in the html by filtering.
     demographic = data.metadata.filter((sample) => sample.id === 940)[0];
 
-    // Display each key-value pair from the metadata JSON object
+    // Cycle through the data and add to the html
     Object.entries(demographic).forEach(([key, value]) =>
       d3
         .select("#sample-metadata")
         .append("p")
         .text(`${key.toUpperCase()}: ${value}`)
     );
+    // Adding a gauge chart - Bonus
+    // Storing the wrfeq in a variable
+    var wfreqDefault = demographic.wfreq;
+
+    var gaugeData = [
+      {
+        domain: { x: [0, 1], y: [0, 1] },
+        value: wfreqDefault,
+        title: {
+          text: "<b>Belly Button Washing Frequency</b> <br> Scrubs per week",
+        },
+        type: "indicator",
+        mode: "gauge+number",
+        gauge: {
+          axis: { range: [null, 9] },
+          steps: [
+            { range: [0, 1], color: "RGB(241, 227, 255)" },
+            { range: [1, 2], color: "RGB(220, 197, 244)" },
+            { range: [2, 3], color: "RGB(200, 167, 225)" },
+            { range: [3, 4], color: "RGB(181, 137, 214)" },
+            { range: [4, 5], color: "RGB(153, 105, 199)" },
+            { range: [5, 6], color: "RGB(153, 105, 199)" },
+            { range: [6, 7], color: "RGB(128, 79, 179)" },
+            { range: [7, 8], color: "RGB(106, 53, 156)" },
+            { range: [8, 9], color: "RGB(89, 49, 150)" },
+          ],
+        },
+      },
+    ];
+
+    var gaugeLayout = {
+      width: 440,
+      height: 600,
+      margin: { t: 0, b: 0, l: 40 },
+      paper_bgcolor: "rgb(221, 218, 218)",
+      plot_bgcolor: "rgb(221, 218, 218)",
+    };
+
+    Plotly.newPlot("gauge", gaugeData, gaugeLayout);
   }
+
   init();
 
   d3.selectAll("#selDataset").on("change", updatePlot);
@@ -120,9 +174,13 @@ d3.json("samples.json").then((jsondata) => {
     // Clear the space for demo info
     d3.select("#sample-metadata").html("");
 
-    // Display the demograpic info
+    // Display the demographic info
     Object.entries(demographic1).forEach(([key, value]) =>
       d3.select("#sample-metadata").append("p").text(`${key}: ${value}`)
     );
+    // Resetting the gauge
+    var wfreq = demographic1.wfreq;
+
+    Plotly.restyle("gauge", "value", wfreq);
   }
 });
